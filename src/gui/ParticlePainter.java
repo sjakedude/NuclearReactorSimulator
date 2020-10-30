@@ -22,5 +22,4 @@ class ParticlePainter extends JPanel {
             graphics.fillOval(particle.getX(), particle.getY(), 10, 10);
         }
     }
-
 }

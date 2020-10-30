@@ -22,7 +22,8 @@ public class MainLoop {
 	// Milliseconds delay between movement
 	static int DELAY = 10;
 	
-	static ArrayList<Uranium235> particles = new ArrayList<>();;
+	// List of uranium particles to be simulated
+	static ArrayList<Uranium235> particles = new ArrayList<>();
 	
 	/**
 	 * Method that scans every element of the array and checks
@@ -49,6 +50,7 @@ public class MainLoop {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 
+		// Initializing the display window
 		Display gui = new Display();
 
 		// Initializing the size of the core
@@ -58,20 +60,15 @@ public class MainLoop {
 		for (int i = 0; i < core.length; i++) {
 			for (int j = 0; j < core.length; j++) {
 				core[i][j] = "";
-	
 			}
 		}
 		
-		// Generating uranium
+		// Generating uranium and drawing in window
 		Uranium235Factory factory = new Uranium235Factory(CORE_SIZE);
 		particles = factory.generateUranium(20);
-		
 		gui.draw(particles);
-		
 		System.out.println("# of U235: " + particles.size());
-				
-		//System.exit(0);
-		
+						
 		// Simulating the movement of particles
 		for (int i = 1; i < TICKS; i++) {
 			// Printing out loop number
@@ -103,6 +100,8 @@ public class MainLoop {
 				p.alterX(randX);
 				p.alterY(randY);
 			}
+			
+			// Updating the display window
 			gui.draw(particles);
 		}	
 	}
