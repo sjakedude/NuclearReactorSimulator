@@ -17,8 +17,10 @@ public class Uranium235Factory {
 			if (quantity > 20) {
 				System.out.println("Sorry that is too much for the core to handle");
 			} else {
-				uranium.add(new Uranium235(getRandomCoordinate(), getRandomCoordinate(), Integer.toString(nextUUID)));
-				nextUUID++;
+				for (int i = 0; i < 20; i++) {
+					uranium.add(new Uranium235(getRandomCoordinate(), getRandomCoordinate(), Integer.toString(nextUUID)));
+					nextUUID++;
+				}
 			}
 			return uranium;
 

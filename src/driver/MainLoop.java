@@ -1,18 +1,29 @@
 package driver;
 
+import gui.Display;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import models.Uranium235;
 import models.Uranium235Factory;
 
 
 public class MainLoop {
 	
-	static int TICKS = 100;
-	static int CORE_SIZE = 100;
-	static int DELAY = 0;
-	static ArrayList<Uranium235> particles = new ArrayList<>();;
+	// Number of times movement is altered
+	static int TICKS = 200;
+	
+	// Max x and y coords of particles
+	static int CORE_SIZE = 430;
+	
+	// Milliseconds delay between movement
+	static int DELAY = 10;
+	
+	// List of uranium particles to be simulated
+	static ArrayList<Uranium235> particles = new ArrayList<>();
 	
 	/**
 	 * Method that scans every element of the array and checks
@@ -38,7 +49,10 @@ public class MainLoop {
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		
+
+		// Initializing the display window
+		Display gui = new Display();
+
 		// Initializing the size of the core
 		String[][] core = new String[CORE_SIZE][CORE_SIZE];
 		
@@ -46,14 +60,15 @@ public class MainLoop {
 		for (int i = 0; i < core.length; i++) {
 			for (int j = 0; j < core.length; j++) {
 				core[i][j] = "";
-	
 			}
 		}
 		
-		// Generating uranium
+		// Generating uranium and drawing in window
 		Uranium235Factory factory = new Uranium235Factory(CORE_SIZE);
-		particles = factory.generateUranium(10);
-		
+		particles = factory.generateUranium(20);
+		gui.draw(particles);
+		System.out.println("# of U235: " + particles.size());
+						
 		// Simulating the movement of particles
 		for (int i = 1; i < TICKS; i++) {
 			// Printing out loop number
@@ -78,13 +93,16 @@ public class MainLoop {
 			checkForCollisions(core);
 			
 			// Sleeping for seconds
-			TimeUnit.SECONDS.sleep(DELAY);
+			TimeUnit.MILLISECONDS.sleep(DELAY);
 			
 			// Altering positions
 			for (Uranium235 p : particles) {
 				p.alterX(randX);
 				p.alterY(randY);
 			}
+			
+			// Updating the display window
+			gui.draw(particles);
 		}	
 	}
 }
