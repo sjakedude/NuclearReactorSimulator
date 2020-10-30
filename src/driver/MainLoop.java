@@ -1,8 +1,12 @@
 package driver;
 
+import gui.Display;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import models.Uranium235;
 import models.Uranium235Factory;
 
@@ -38,7 +42,9 @@ public class MainLoop {
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		
+
+		Display.run();
+
 		// Initializing the size of the core
 		String[][] core = new String[CORE_SIZE][CORE_SIZE];
 		
