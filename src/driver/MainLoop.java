@@ -13,10 +13,15 @@ import models.Uranium235Factory;
 
 public class MainLoop {
 	
-	// Milliseconds
+	// Number of times movement is altered
 	static int TICKS = 200;
+	
+	// Max x and y coords of particles
 	static int CORE_SIZE = 430;
-	static int DELAY = 1;
+	
+	// Milliseconds delay between movement
+	static int DELAY = 10;
+	
 	static ArrayList<Uranium235> particles = new ArrayList<>();;
 	
 	/**

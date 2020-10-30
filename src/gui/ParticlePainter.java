@@ -19,7 +19,6 @@ class ParticlePainter extends JPanel {
     protected void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
         for (Uranium235 particle : particles) {
-        	System.out.println("drawing");
             graphics.fillOval(particle.getX(), particle.getY(), 10, 10);
         }
     }
