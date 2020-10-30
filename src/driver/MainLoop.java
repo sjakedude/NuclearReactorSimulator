@@ -1,12 +1,17 @@
 package driver;
 
 import gui.Display;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import models.Uranium235;
 import models.Uranium235Factory;
 
@@ -14,7 +19,7 @@ import models.Uranium235Factory;
 public class MainLoop {
 	
 	// Number of times movement is altered
-	static int TICKS = 200;
+	static int TICKS = 10;
 	
 	// Max x and y coords of particles
 	static int CORE_SIZE = 430;
@@ -50,6 +55,10 @@ public class MainLoop {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 
+		// Setting up log4j
+		Logger logger = Logger.getLogger(MainLoop.class);
+		BasicConfigurator.configure();
+		
 		// Initializing the display window
 		Display gui = new Display();
 
@@ -67,12 +76,12 @@ public class MainLoop {
 		Uranium235Factory factory = new Uranium235Factory(CORE_SIZE);
 		particles = factory.generateUranium(20);
 		gui.draw(particles);
-		System.out.println("# of U235: " + particles.size());
+		logger.debug("# of U235: " + particles.size());
 						
 		// Simulating the movement of particles
 		for (int i = 1; i < TICKS; i++) {
 			// Printing out loop number
-			System.out.println("Loop number: " + i);
+			logger.debug("Loop number: " + i);
 
 			// Creating random increments/decrements for x and y coordinates
 			int randX = (int) (Math.random() * (1 - 0 + 1) + 0);
@@ -81,11 +90,11 @@ public class MainLoop {
 			// Place particles inside core
 			for (Uranium235 p : particles) {
 				// Printing out the contents of p and the core position to be looked at
-				System.out.println(p);
-				System.out.println("Looking at: " + core[p.getX()][p.getY()] + " and comparing to " + p.getUUID());
+				logger.debug(p);
+				logger.debug("Looking at: " + core[p.getX()][p.getY()] + " and comparing to " + p.getUUID());
 				
 				// Translating the uranium to a different location inside the core
-				System.out.println("Moved " + p.getUUID() + " to " + p);
+				logger.debug("Moved " + p.getUUID() + " to " + p);
 				core[p.getLastX()][p.getLastY()] = "";
 				core[p.getX()][p.getY()] = core[p.getX()][p.getY()] + p.getUUID();
 			}
@@ -93,6 +102,7 @@ public class MainLoop {
 			checkForCollisions(core);
 			
 			// Sleeping for seconds
+			logger.debug("Sleeping for " + DELAY);
 			TimeUnit.MILLISECONDS.sleep(DELAY);
 			
 			// Altering positions
