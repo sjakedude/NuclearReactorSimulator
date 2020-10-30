@@ -13,9 +13,10 @@ import models.Uranium235Factory;
 
 public class MainLoop {
 	
-	static int TICKS = 100;
-	static int CORE_SIZE = 100;
-	static int DELAY = 0;
+	// Milliseconds
+	static int TICKS = 200;
+	static int CORE_SIZE = 430;
+	static int DELAY = 1;
 	static ArrayList<Uranium235> particles = new ArrayList<>();;
 	
 	/**
@@ -43,7 +44,7 @@ public class MainLoop {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 
-		Display.run();
+		Display gui = new Display();
 
 		// Initializing the size of the core
 		String[][] core = new String[CORE_SIZE][CORE_SIZE];
@@ -58,7 +59,13 @@ public class MainLoop {
 		
 		// Generating uranium
 		Uranium235Factory factory = new Uranium235Factory(CORE_SIZE);
-		particles = factory.generateUranium(10);
+		particles = factory.generateUranium(20);
+		
+		gui.draw(particles);
+		
+		System.out.println("# of U235: " + particles.size());
+				
+		//System.exit(0);
 		
 		// Simulating the movement of particles
 		for (int i = 1; i < TICKS; i++) {
@@ -84,13 +91,14 @@ public class MainLoop {
 			checkForCollisions(core);
 			
 			// Sleeping for seconds
-			TimeUnit.SECONDS.sleep(DELAY);
+			TimeUnit.MILLISECONDS.sleep(DELAY);
 			
 			// Altering positions
 			for (Uranium235 p : particles) {
 				p.alterX(randX);
 				p.alterY(randY);
 			}
+			gui.draw(particles);
 		}	
 	}
 }

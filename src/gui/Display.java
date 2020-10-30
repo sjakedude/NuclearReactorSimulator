@@ -1,36 +1,29 @@
 package gui;
 
 import java.awt.Graphics;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
-public class Display {
+import models.Uranium235;
 
-  static JFrame frame;
-  static JPanel panel;
+public class Display extends JFrame {
 
-  public static void run() {
-    frame = new JFrame();
-    frame.setBounds(500, 500, 500, 500);
-    panel = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawLine(0, 0, 100, 100);
-        g.drawOval(10 ,10, 10, 10);
-      }
-    };
-    frame.add(panel);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setVisible(true);
-
-    Graphics g = panel.getGraphics();
-    g.drawOval(50, 50, 50, 50);
-    panel.paint(g);
+	private ParticlePainter particlePainter = new ParticlePainter();
+	
+  public Display() {
+      setSize(500, 500);
+      this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      this.setVisible(true);
+      this.add(particlePainter);
+      particlePainter.setVisible(true);
   }
 
-  public static void insertComponent() {
-    Graphics g = panel.getGraphics();
+  public void draw(List<Uranium235> particles) {
+	  particlePainter.setParticles(particles);
+	  particlePainter.repaint();
   }
 
 
