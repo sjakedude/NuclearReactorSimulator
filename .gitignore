@@ -3,6 +3,7 @@
 .settings
 .idea
 bin
+NuclearReactorSimulator.iml
 
 # Ignore Gradle project-specific cache directory
 .gradle
