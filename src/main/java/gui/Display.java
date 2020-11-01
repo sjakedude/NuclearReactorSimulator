@@ -14,7 +14,6 @@ public class Display extends JFrame {
     public Display() {
         setSize(500, 500);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setVisible(true);
         this.add(particlePainter);
         particlePainter.setVisible(true);
     }
@@ -22,5 +21,6 @@ public class Display extends JFrame {
     public void draw(List<Uranium235> particles) {
 	    particlePainter.setParticles(particles);
 	    particlePainter.repaint();
+	    this.setVisible(true);
     }
 }
