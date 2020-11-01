@@ -1,10 +1,8 @@
 package gui;
 
-import java.awt.Graphics;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import models.Uranium235;

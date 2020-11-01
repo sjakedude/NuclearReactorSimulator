@@ -2,22 +2,21 @@ package driver;
 
 import gui.Display;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import models.Uranium235;
 import models.Uranium235Factory;
 
 
 public class MainLoop {
-	
+
+	// Logger for main
+	private static final Logger logger = LogManager.getLogger("Main");
+
 	// Number of times movement is altered
 	static int TICKS = 10;
 	
@@ -55,10 +54,6 @@ public class MainLoop {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 
-		// Setting up log4j
-		Logger logger = Logger.getLogger(MainLoop.class);
-		BasicConfigurator.configure();
-		
 		// Initializing the display window
 		Display gui = new Display();
 
