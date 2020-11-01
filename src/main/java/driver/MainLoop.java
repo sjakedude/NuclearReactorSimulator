@@ -18,13 +18,13 @@ public class MainLoop {
 	private static final Logger logger = LogManager.getLogger("Main");
 
 	// Number of times movement is altered
-	static int TICKS = 10;
+	static int TICKS = 100;
 	
 	// Max x and y coords of particles
 	static int CORE_SIZE = 430;
 	
 	// Milliseconds delay between movement
-	static int DELAY = 10;
+	static int DELAY = 100;
 	
 	// List of uranium particles to be simulated
 	static ArrayList<Uranium235> particles = new ArrayList<>();
