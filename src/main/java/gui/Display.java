@@ -9,7 +9,7 @@ import models.Uranium235;
 
 public class Display extends JFrame {
 
-	private ParticlePainter particlePainter = new ParticlePainter();
+	private final ParticlePainter particlePainter = new ParticlePainter();
 	
     public Display() {
         setSize(500, 500);

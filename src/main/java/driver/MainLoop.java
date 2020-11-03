@@ -8,17 +8,19 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+
 import models.Uranium235;
 import models.Uranium235Factory;
 
+import static java.lang.System.exit;
 
 public class MainLoop {
 
 	// Logger for main
-	private static final Logger logger = LogManager.getLogger("Main");
+	private static final Logger logger = LogManager.getLogger(MainLoop.class);
 
 	// Number of times movement is altered
-	static int TICKS = 100;
+	static int TICKS = 500;
 	
 	// Max x and y coords of particles
 	static int CORE_SIZE = 430;
@@ -40,7 +42,7 @@ public class MainLoop {
 			for (int j = 0; j < core.length; j++) {
 				if (core[i][j].length() > 7) {
 					// Printing out the collision coordinates
-					System.out.println("COLLISION AT (" + i + ", " + j + ")");
+					logger.debug("COLLISION AT (" + i + ", " + j + ")");
 					// Setting the position to empty
 					core[i][j] = "";
 				}
